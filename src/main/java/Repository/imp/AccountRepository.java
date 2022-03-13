@@ -50,4 +50,22 @@ public class AccountRepository implements Repository<Account> {
         q.setParameter("id",id);
         return q.getSingleResult();
     }
+    public Account findByUserName(String name){
+        var t = sessionFactory.getCurrentSession();
+        String hql = "from Entity.Account where " +
+                "userName =:name";
+        var q = t.createQuery(hql,Account.class);
+        q.setParameter("name",name);
+        return q.getSingleResult();
+    }
+    public void ChangePassword(Integer newPassCode,String name){
+        var t = sessionFactory.getCurrentSession();
+
+        String hql="update Entity.Account set passCode =:new " +
+                "where userName =:name";
+        var query =t.createQuery(hql);
+        query.setParameter("name",newPassCode);
+        query.setParameter("name",name);
+        query.executeUpdate();
+    }
 }

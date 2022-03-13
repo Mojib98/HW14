@@ -25,7 +25,7 @@ public class SessionFactorySingleton {
             // SessionFactory is immutable.
             INSTANCE = new MetadataSources(registry)
                     .addAnnotatedClass(Account.class)
-                  //  .addAnnotatedClass(Tweet.class)
+                    .addAnnotatedClass(Tweet.class)
                     .addAnnotatedClass(BasicClass.class)
         /*            .addAnnotatedClass(Person.class)
                     .addAnnotatedClass(BaseClass.class)

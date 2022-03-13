@@ -1,15 +1,18 @@
-package Service;
+package Service.imp;
 
 import Entity.Account;
 import Repository.imp.SessionFactorySingleton;
 import Repository.imp.AccountRepository;
+import Service.UserService;
+import lombok.Getter;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Random;
-
+@Getter
 public class AccountService implements UserService<Account>
 {
+    private String name;
     AccountRepository accountRepository = new AccountRepository();
     SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
@@ -93,5 +96,16 @@ public class AccountService implements UserService<Account>
             }
         }
         return account;
+    }
+    public void changePassword(Integer newPass){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                accountRepository.ChangePassword(newPass,name);
+                t.commit();
+            } catch (Exception e) {
+                t.rollback();
+            }
+        }
     }
 }

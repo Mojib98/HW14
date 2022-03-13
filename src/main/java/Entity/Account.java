@@ -11,7 +11,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode
 public class Account extends BasicClass{
 /*    @Id()
@@ -58,5 +57,7 @@ public class Account extends BasicClass{
         this.userName = userName;
         this.passCode = passCode;
     }
+    @OneToMany(mappedBy = "account")
+    private Tweet tweet;
 
 }
