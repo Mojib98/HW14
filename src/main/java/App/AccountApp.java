@@ -1,15 +1,19 @@
 package App;
 
 import Entity.Account;
+import Service.LoginService;
 import Service.imp.AccountService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.Scanner;
 
 public class AccountApp {
     Scanner scanner = new Scanner(System.in);
     Account account;
+    String name;
     AccountService accountService;
+    LoginService loginService;
     public void singUp(){
         try {
         System.out.println("\t\twelecom");
@@ -67,5 +71,28 @@ public class AccountApp {
         String name = scanner.next();
         account2=accountService.findByUserName(name);
         return account2;
+    }
+    public boolean logIn(){
+        System.out.print("please insert userName: ");
+        String name = scanner.next();
+        System.out.println();
+        System.out.print("please insert passcode");
+        Integer passcode=scanner.nextInt();
+        Boolean check =loginService.checking(name,passcode);
+        if(check){
+            System.out.println("\t\tyou currect");
+            this.name=name;
+            return true;
+        }else {
+            System.out.println("\t\tNot find");
+            return false;
+
+        }
+    }
+    public Account myAccount(){
+        Account account2;
+        account2=accountService.findByUserName(this.name);
+        return account2;
+
     }
 }
