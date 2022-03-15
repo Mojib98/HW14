@@ -35,7 +35,8 @@ public class TweetRepository implements TweetRep<Tweet> {
         var session = sessionFactory.getCurrentSession();
         String hql="from Entity.Tweet";
         var query=session.createQuery(hql,Tweet.class);
-        return query.list();
+        List<Tweet> list= query.getResultList();
+        return list;
     }
 
     @Override

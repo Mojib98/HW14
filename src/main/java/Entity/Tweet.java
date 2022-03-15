@@ -23,7 +23,7 @@ public class Tweet extends BasicClass {
     private Integer likes=0;
     @ColumnDefault("0")
     private Integer dislike=0;
-    @ManyToOne(fetch =FetchType.EAGER )
+    @ManyToOne()
     private Account account;
 
     public Tweet(Integer id, String text, Account account) {
@@ -35,5 +35,15 @@ public class Tweet extends BasicClass {
     public Tweet(Integer id, String text) {
         super(id);
         this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Tweet{" +
+                "text='" + text + '\'' +
+                ", likes=" + likes +
+                ", dislike=" + dislike +
+                ", account=" + account +
+                "} " + super.toString();
     }
 }

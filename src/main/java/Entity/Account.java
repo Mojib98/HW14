@@ -32,13 +32,13 @@ public class Account extends BasicClass{
             inverseJoinColumns = @JoinColumn(name = "id2")
     )*/
 //    private Set<Account> accounts;
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "following")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "following",fetch = FetchType.EAGER)
     private Set<Account> followers = new HashSet<>();
 
     @JoinTable(name = "followers",
             joinColumns = {@JoinColumn(name = "account_id")},
             inverseJoinColumns = {@JoinColumn(name = "follower_id")})
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Account> following = new HashSet<>();
 
     public void addFollower(Account toFollow) {
@@ -56,7 +56,17 @@ public class Account extends BasicClass{
         this.userName = userName;
         this.passCode = passCode;
     }
-    @OneToMany(mappedBy = "account")
+   /* @OneToMany(mappedBy = "account")
     private List<Tweet> tweet;
-
+*/
+    @Override
+    public String toString() {
+        return "Account{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", passCode=" + passCode +
+                ", followers=" + followers +
+                ", following=" + following +
+                "} " + super.toString();
+    }
 }

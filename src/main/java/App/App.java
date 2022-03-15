@@ -42,7 +42,7 @@ public class App {
                     break;
                 case 2:
                     twitterSystem.allTweet();
-                    twitterSystem.like();
+                    actionForPost();
                     break;
                 case 3:
                     twitterSystem.seeTweetWithId();

@@ -36,4 +36,14 @@ public class Comment extends BasicClass {
     private Comment comment;
     @OneToMany(mappedBy = "comment")
     private List<Comment> commentList;
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "text='" + text + '\'' +
+                ", tweet=" + tweet +
+                ", comment=" + comment +
+                ", commentList=" + commentList +
+                "} " + super.toString();
+    }
 }

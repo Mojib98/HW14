@@ -63,7 +63,7 @@ public class TwitterSystem {
     }
     public void allTweet(){
         List<Tweet> list = tweetService.findAll();
-        list.forEach(System.out::println);
+        list.stream().forEach(System.out::println);
     }
     public void addComment(){
         System.out.println("\tplease insert id tweet\n");

@@ -2,6 +2,7 @@ package Repository.imp;
 
 import Entity.Account;
 import Entity.BasicClass;
+import Entity.Comment;
 import Entity.Tweet;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -27,6 +28,7 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(Account.class)
                     .addAnnotatedClass(Tweet.class)
                     .addAnnotatedClass(BasicClass.class)
+                    .addAnnotatedClass(Comment.class)
         /*            .addAnnotatedClass(Person.class)
                     .addAnnotatedClass(BaseClass.class)
                     .addAnnotatedClass(Employee.class)
