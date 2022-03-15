@@ -5,11 +5,13 @@ import Repository.imp.SessionFactorySingleton;
 import Repository.imp.AccountRepository;
 import Service.UserService;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Random;
 @Getter
+@Setter
 public class AccountService implements UserService<Account>
 {
     private String name;
@@ -44,7 +46,7 @@ public class AccountService implements UserService<Account>
             var t = session.getTransaction();
             try {
 
-                accountRepository.add(account);
+                accountRepository.modify(account);
                 t.commit();
             } catch (Exception e) {
                 t.rollback();
@@ -106,4 +108,18 @@ public class AccountService implements UserService<Account>
             }
         }
     }
+    public Account findByUserName(String name) {
+        Account account = null;
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                account=accountRepository.findByUserName(name);
+                t.commit();
+            } catch (Exception e) {
+                t.rollback();
+            }
+        }
+        return account;
+    }
+
 }

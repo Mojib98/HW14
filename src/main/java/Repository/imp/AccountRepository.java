@@ -1,10 +1,7 @@
 package Repository.imp;
-
 import Entity.Account;
 import Repository.Repository;
 import org.hibernate.SessionFactory;
-
-
 import java.util.List;
 
 public class AccountRepository implements Repository<Account> {
