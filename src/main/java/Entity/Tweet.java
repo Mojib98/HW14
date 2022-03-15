@@ -18,9 +18,11 @@ public class Tweet extends BasicClass {
     private Integer id;*/
     @Column(length = 280,nullable = false)
     private String text;
+//    @ColumnDefault("0"
+    @Column(columnDefinition = "integer default 0")
+    private Integer likes=0;
     @ColumnDefault("0")
-    private Integer like;
-    private Integer dislike;
+    private Integer dislike=0;
     @ManyToOne
     private Account account;
 

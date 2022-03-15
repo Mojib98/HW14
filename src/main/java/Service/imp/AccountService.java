@@ -26,8 +26,8 @@ public class AccountService implements UserService<Account>
         System.out.println(ids);
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
-            t.begin();
             try {
+                t.begin();
                 accountRepository.add(account);
                 t.commit();
             } catch (Exception e) {

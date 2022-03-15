@@ -1,3 +1,4 @@
+/*
 package Repository;
 
 import org.hibernate.SessionFactory;
@@ -21,3 +22,4 @@ public class EntityManagerFactorySingleton {
         return EntityManagerFactorySingleton.LazyHolder.INSTANCE;
     }
 }
+*/

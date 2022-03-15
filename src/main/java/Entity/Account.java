@@ -58,6 +58,6 @@ public class Account extends BasicClass{
         this.passCode = passCode;
     }
     @OneToMany(mappedBy = "account")
-    private Tweet tweet;
+    private List<Tweet> tweet;
 
 }

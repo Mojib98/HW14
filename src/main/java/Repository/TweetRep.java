@@ -13,5 +13,5 @@ public interface TweetRep <T extends Tweet>{
     void like(Integer id);
     void dislike(Integer id);
     T findById(Integer id);
-    T findByUserName();
+    List<Tweet> findByUserName(String name);
 }
