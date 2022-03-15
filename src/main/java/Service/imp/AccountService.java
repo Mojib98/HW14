@@ -35,9 +35,7 @@ public class AccountService implements UserService<Account>
                 t.rollback();
             }
         }
-
-
-        return null;
+        return account;
     }
 
     @Override
