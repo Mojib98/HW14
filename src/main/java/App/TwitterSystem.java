@@ -1,7 +1,9 @@
 package App;
 
 import Entity.Account;
+import Entity.Comment;
 import Entity.Tweet;
+import Service.imp.CommentService;
 import Service.imp.TweetService;
 
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.Scanner;
 public class TwitterSystem {
     TweetService tweetService=new TweetService();
     Scanner scanner = new Scanner(System.in);
+    CommentService commentService = new CommentService();
     public void writeTweet(Account account){
         System.out.println("write your tweet ");
         String text = scanner.next();
@@ -36,14 +39,21 @@ public class TwitterSystem {
         List<Tweet> list = tweetService.findAll();
         list.forEach(System.out::println);
     }
-    public void seeTweetWithId(){
+    public Tweet seeTweetWithId(){
         System.out.print("\tplease insert id: ");
        int idT=scanner.nextInt();
         Tweet tweet = tweetService.findById(idT);
+        return tweet;
     }
     public void like(){
-        System.out.println("\tplease insert tweet id for like");
+        System.out.println("\tif like any tweet" +
+                " please insert id for like \n" +
+                "\t else insert 0");
+
         int id = scanner.nextInt();
+        if (id == 0){
+            return;
+        }
         tweetService.like(id);
     }
     public void dislike(){
@@ -54,5 +64,14 @@ public class TwitterSystem {
     public void allTweet(){
         List<Tweet> list = tweetService.findAll();
         list.forEach(System.out::println);
+    }
+    public void addComment(){
+        System.out.println("\tplease insert id tweet\n");
+        int idT = scanner.nextInt();
+        Tweet tweet = tweetService.findById(idT);
+        System.out.println("please add Comment");
+        String text = scanner.next();
+        Comment comment = new Comment(null,text,tweet);
+        commentService.addComment(comment);
     }
 }
