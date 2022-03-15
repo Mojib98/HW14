@@ -113,9 +113,11 @@ public class AccountService implements UserService<Account>
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
+                t.begin();
                 account=accountRepository.findByUserName(name);
                 t.commit();
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
             }
         }

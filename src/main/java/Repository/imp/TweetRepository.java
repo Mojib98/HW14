@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 
 import java.util.List;
 
+import static com.sun.tools.attach.VirtualMachine.list;
+
 public class TweetRepository implements TweetRep<Tweet> {
     SessionFactory sessionFactory;
 
@@ -38,12 +40,14 @@ public class TweetRepository implements TweetRep<Tweet> {
 
     @Override
     public List<Tweet> findAllMyTweet(Account account) {
+        List<Tweet> list = null;
         var session = sessionFactory.getCurrentSession();
         String hql="from Entity.Tweet " +
                 "where account.userName =:id";
         var query=session.createQuery(hql,Tweet.class);
         query.setParameter("id",account.getUserName());
-        return query.list();
+        list =query.getResultList();
+        return list;
     }
 
     @Override

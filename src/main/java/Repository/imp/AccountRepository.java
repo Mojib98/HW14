@@ -53,7 +53,7 @@ public class AccountRepository implements Repository<Account> {
                 "userName =:name";
         var q = t.createQuery(hql,Account.class);
         q.setParameter("name",name);
-        return q.getSingleResult();
+        return q.uniqueResult();
     }
     public void ChangePassword(Integer newPassCode,String name){
         var t = sessionFactory.getCurrentSession();

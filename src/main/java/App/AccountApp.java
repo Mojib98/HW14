@@ -12,8 +12,8 @@ public class AccountApp {
     Scanner scanner = new Scanner(System.in);
     Account account;
     String name;
-    AccountService accountService;
-    LoginService loginService;
+    AccountService accountService = new AccountService();
+    LoginService loginService = new LoginService();
     public void singUp(){
         try {
         System.out.println("\t\twelecom");
@@ -91,6 +91,7 @@ public class AccountApp {
     }
     public Account myAccount(){
         Account account2;
+        System.out.println(this.name+"  ddd ");
         account2=accountService.findByUserName(this.name);
         return account2;
 

@@ -11,7 +11,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Account extends BasicClass{
 /*    @Id()
     @GeneratedValue(strategy =  GenerationType.IDENTITY)

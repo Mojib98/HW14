@@ -23,7 +23,7 @@ public class Tweet extends BasicClass {
     private Integer likes=0;
     @ColumnDefault("0")
     private Integer dislike=0;
-    @ManyToOne
+    @ManyToOne(fetch =FetchType.EAGER )
     private Account account;
 
     public Tweet(Integer id, String text, Account account) {
