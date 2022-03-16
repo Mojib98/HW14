@@ -42,14 +42,18 @@ public class AccountApp {
             System.out.println("\t\t!!!WROong!!!");
         }
     }
-    public void ShowAllUser(){
-        List<Account> accountList;
+    public void showAllUser(){
+        List<Account> accountList = null;
         try {
             accountList=accountService.findAll();
-            accountList.forEach(System.out::println);
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("\t\t!!!Not Find!!!");
+        }
+        for(Account a:accountList){
+            System.out.println("\taccount name :"+a.getUserName()+"\n" +
+                            "\tuserId: "+a.getUserId()+"" +
+                            "\n\tid: "+a.getId());
         }
     }
     public void findByUser(){
@@ -70,6 +74,7 @@ public class AccountApp {
         System.out.print("\tplease insert userName: ");
         String name = scanner.next();
         account2=accountService.findByUserName(name);
+        System.out.println(account2);
         return account2;
     }
     public boolean logIn(){
@@ -95,5 +100,8 @@ public class AccountApp {
         account2=accountService.findByUserName(this.name);
         return account2;
 
+    }
+    public void follow(Account account){
+        accountService.modify(account);
     }
 }

@@ -35,7 +35,10 @@ public class App {
                     "\tfor see All tweet insert 2\n" +
                     "\tfor see tweet whit id insert 3\n" +
                     "\tfor see tweet for userName insert 4\n" +
-                    "\tfor tweeting insert 5\t" +
+                    "\tfor tweeting insert 5\n" +
+                    "\tfor find user insert 6\n" +
+                    "\tfor All user insert 7\n" +
+                    "\tfor see your profile insert 8\n" +
                     "");
             int section = scanner.nextInt();
             switch (section) {
@@ -65,6 +68,14 @@ public class App {
                     twitterSystem.writeTweet(this.account);
                     break;
                 case 6:
+                 accountApp.findByName();
+                case 7:
+                    accountApp.showAllUser();
+                    Account account2 = accountApp.myAccount();
+                  Account account=  following(account2);
+                    accountApp.follow(account);
+                    break;
+
             }
         }
     }
@@ -96,6 +107,11 @@ public class App {
 
 
     }
-
+    private Account following(Account account){
+        System.out.println("\tfor follow any of user please insert follow else exit ");
+       Account account1= accountApp.findByName();
+       account.addFollower(account1);
+        return account;
+    }
 
 }

@@ -45,10 +45,11 @@ public class AccountService implements UserService<Account>
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
-
+                t.begin();
                 accountRepository.modify(account);
                 t.commit();
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
             }
         }
@@ -60,10 +61,11 @@ public class AccountService implements UserService<Account>
          try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
-
+                t.begin();
                 list =accountRepository.findAll();
                 t.commit();
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
             }
         }
