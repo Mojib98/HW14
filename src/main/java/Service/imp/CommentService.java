@@ -63,11 +63,16 @@ public class CommentService implements CommentSer<Comment> {
 
     @Override
     public Comment reply(Comment comment) {
+        return null;
+    }
+
+    public Comment reply(Comment comment,Comment comment1) {
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
                 t.begin();
-                 commentRepository.reply(comment);
+                 commentRepository.reply(comment,comment1);
+                // comment1.addReply(comment);
                  t.commit();
             } catch (Exception e) {
                 e.printStackTrace();

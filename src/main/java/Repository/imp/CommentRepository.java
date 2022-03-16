@@ -53,9 +53,15 @@ public class CommentRepository implements CommentRep<Comment> {
 
     @Override
     public Comment reply(Comment comment) {
+        return null;
+    }
+
+
+    public Comment reply(Comment comment,Comment comment1) {
         var session = sessionFactory.getCurrentSession();
-        session.save(comment.getComment());
-        session.update(comment);
+        session.save(comment);
+        comment1.addReply(comment);
+        session.update(comment1);
         return comment;
     }
 

@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Comment extends BasicClass {
     private String text;
 
@@ -31,14 +31,14 @@ public class Comment extends BasicClass {
     @ManyToOne
     private Tweet tweet;
 
-    @ManyToOne()
-    private Comment comment;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "comment")
-    private List<Comment> commentList = new ArrayList<>();
-    public void addComment(Comment comment){
-        commentList.add(comment);
-        comment.addComment(this);
-    }
+//    @ManyToOne()
+//    private Comment comment;
+/*    @OneToMany(fetch = FetchType.EAGER,mappedBy = "comment")
+    private List<Comment> commentList = new ArrayList<>();*/
+//    public void addComment(Comment comment){
+//        commentSet.add(comment);
+//        comment.addComment(this);
+//    }
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "commentSet",fetch = FetchType.EAGER)
     private Set<Comment> reply = new HashSet<>();
 
@@ -49,12 +49,12 @@ public class Comment extends BasicClass {
     private Set<Comment> commentSet = new HashSet<>();
 
     public void addReply(Comment comment) {
-        commentList.add(comment);
+        commentSet.add(comment);
         comment.getReply().add(this);
     }
 
     public void removeFollower(Comment toFollow) {
-        commentList.remove(toFollow);
+        commentSet.remove(toFollow);
         toFollow.getReply().remove(this);
     }
 

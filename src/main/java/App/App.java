@@ -57,7 +57,7 @@ public class App {
                     List<Comment> comments2 = twitterSystem.showComment();
                     comments2.forEach(System.out::println);
                     Comment comment = addReploy(tweet2);
-                    twitterSystem.addReploye(comment);
+                  //  twitterSystem.addReploye(comment);
                     break;
                 case 4:
                     Account account1 = accountApp.findByName();
@@ -106,8 +106,9 @@ public class App {
         String text = scanner.next();
         System.out.println();
         Comment comment1 = new Comment(null, text, null);
-        comment.addReply(comment1);
+//        comment.addReply(comment1);
         //  comment.addComment(comment1);
+        twitterSystem.commment(comment1,comment);
         return comment;
 
 
@@ -148,27 +149,23 @@ public class App {
         }
     }
     private void unfollowing(Account account2){
-       /* System.out.println("\tfor follow any of user please insert unfollow else exit ");
+        System.out.println("\tfor follow any of user please insert unfollow else exit ");
         String select = scanner.next().trim();
         switch (select) {
-            case "unfollow":*/
-               // Account account2 = accountApp.myAccount();
+            case "unfollow":
                 Account account1 = accountApp.findByName();
                 System.out.println(account1);
                 account2.removeFollower(account1);
-               // account2.getFollowing().remove(account1);
-                //account2.getFollowing().remove(account1);
-              //  account1.getFollowers().remove(account2);
                 System.out.println("\tyour name :"+account2.getUserName()+"\n\t" +
                         "you userId: "+account2.getUserId()+"\n\t" +
                         "your follower : "+account2.getFollowers()+"\n\t" +
                         "your following : "+account2.getFollowing()
                 );
                 accountApp.follow(account2);
-              //  accountApp.unfollow(account2,account1);
-            /*    break;
+                break;
             case "exit":
-                break;*/
+                break;
         }
     }
-//}
+
+}
