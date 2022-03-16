@@ -42,7 +42,7 @@ public class Tweet extends BasicClass {
     }
 
 
-    @Override
+  /*  @Override
     public String toString() {
         return "Tweet{" +
                 "text='" + text + '\'' +
@@ -51,5 +51,5 @@ public class Tweet extends BasicClass {
                 ", account=" + account +
 
                 "} " + super.toString();
-    }
+    }*/
 }

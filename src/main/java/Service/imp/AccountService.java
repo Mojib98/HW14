@@ -125,5 +125,23 @@ public class AccountService implements UserService<Account>
         }
         return account;
     }
+    public void unfollow(Account account2,Account account1){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                account2.removeFollower(account1);
+               // account2.getFollowing().remove(account1);
+               // account1.getFollowers().remove(account2);
+              //  accountRepository.modify(account1);
+             //   accountRepository.modify(account2);
+                accountRepository.unfollow(account1,account2);
+                t.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                t.rollback();
+            }
+        }
+    }
 
 }

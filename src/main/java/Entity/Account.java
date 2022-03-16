@@ -5,17 +5,18 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Account extends BasicClass{
 /*    @Id()
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer id;*/
-
 
 
     @Column(unique = true,nullable = false)
@@ -47,7 +48,8 @@ public class Account extends BasicClass{
     }
 
     public void removeFollower(Account toFollow) {
-        following.remove(toFollow);
+       boolean os= following.remove(toFollow);
+        System.out.println(os);
         toFollow.getFollowers().remove(this);
     }
     public Account(Integer id, Integer userId, String userName, Integer passCode) {
@@ -59,14 +61,13 @@ public class Account extends BasicClass{
    /* @OneToMany(mappedBy = "account")
     private List<Tweet> tweet;
 */
-    @Override
+/*    @Override
     public String toString() {
         return "Account{" +
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", passCode=" + passCode +
                 ", followers=" + followers +
                 ", following=" + following +
                 "} " + super.toString();
-    }
+    }*/
 }

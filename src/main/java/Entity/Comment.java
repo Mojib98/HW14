@@ -4,13 +4,14 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 
 public class Comment extends BasicClass {
@@ -38,12 +39,35 @@ public class Comment extends BasicClass {
         commentList.add(comment);
         comment.addComment(this);
     }
-    @Override
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "commentSet",fetch = FetchType.EAGER)
+    private Set<Comment> reply = new HashSet<>();
+
+    @JoinTable(name = "reply",
+            joinColumns = {@JoinColumn(name = "comment_id")},
+            inverseJoinColumns = {@JoinColumn(name = "reploy_id")})
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<Comment> commentSet = new HashSet<>();
+
+    public void addReply(Comment comment) {
+        commentList.add(comment);
+        comment.getReply().add(this);
+    }
+
+    public void removeFollower(Comment toFollow) {
+        commentList.remove(toFollow);
+        toFollow.getReply().remove(this);
+    }
+
+
+/*    @Override
     public String toString() {
         return "Comment{" +
                 "text='" + text + '\'' +
-                ", comment=" +
+                ", tweet=" + tweet +
+                ", comment=" + comment +
                 ", commentList=" + commentList +
+                ", comment=" + comment +
+                ", reply=" + reply +
                 "} " + super.toString();
-    }
+    }*/
 }

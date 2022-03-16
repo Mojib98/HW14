@@ -51,13 +51,13 @@ public class App {
                     actionForPost();
                     break;
                 case 3:
-                  Tweet tweet2= twitterSystem.seeTweetWithId();
+                    Tweet tweet2 = twitterSystem.seeTweetWithId();
                     System.out.println(tweet2);
 //                    actionForPost();
-                    List<Comment> comments2=twitterSystem.showComment();
+                    List<Comment> comments2 = twitterSystem.showComment();
                     comments2.forEach(System.out::println);
-                  Comment comment=  addReploy(tweet2);
-                  twitterSystem.addReploye(comment);
+                    Comment comment = addReploy(tweet2);
+                    twitterSystem.addReploye(comment);
                     break;
                 case 4:
                     Account account1 = accountApp.findByName();
@@ -68,23 +68,27 @@ public class App {
                     twitterSystem.writeTweet(this.account);
                     break;
                 case 6:
-                 accountApp.findByName();
+                    accountApp.findByName();
+                    following();
+                    break;
                 case 7:
                     accountApp.showAllUser();
-                    Account account2 = accountApp.myAccount();
-                  Account account=  following(account2);
-                    accountApp.follow(account);
+                    following();
                     break;
+                case 8:
+                    profile();
+
 
             }
         }
     }
-    private void actionForPost(){
+
+    private void actionForPost() {
         System.out.println("\tfor like insert like\n" +
                 "\tfor comment insert comment\n" +
                 "\t");
-        String select=scanner.next();
-        switch (select){
+        String select = scanner.next();
+        switch (select) {
             case "like":
                 twitterSystem.like();
             case "comment":
@@ -93,25 +97,78 @@ public class App {
                 return;
         }
     }
-    private Comment addReploy(Tweet tweet2){
+
+    private Comment addReploy(Tweet tweet2) {
         System.out.print("insert id : ");
         int id = scanner.nextInt();
-        Comment comment=twitterSystem.findById(id);
+        Comment comment = twitterSystem.findById(id);
         System.out.println("please insert repolye");
         String text = scanner.next();
         System.out.println();
-        Comment comment1 = new Comment(null,text,null);
-        comment.addComment(comment1);
-      //  comment.addComment(comment1);
+        Comment comment1 = new Comment(null, text, null);
+        comment.addReply(comment1);
+        //  comment.addComment(comment1);
         return comment;
 
 
     }
-    private Account following(Account account){
-        System.out.println("\tfor follow any of user please insert follow else exit ");
-       Account account1= accountApp.findByName();
-       account.addFollower(account1);
-        return account;
-    }
 
-}
+    private void following() {
+        System.out.println("\tfor follow any of user please insert follow else exit ");
+        String select = scanner.next().trim();
+        switch (select) {
+            case "follow":
+                Account account2 = accountApp.myAccount();
+                Account account1 = accountApp.findByName();
+                account.addFollower(account1);
+                accountApp.follow(account);
+                break;
+            case "exit":
+                break;
+        }
+
+    }
+    private void profile(){
+        System.out.println("\tfor change password insert pass \n" +
+                "\tfor see your information insert info");
+        String select=scanner.next().trim();
+        switch (select){
+            case "pass":
+                accountApp.changePassword();
+                break;
+            case "info":
+                Account a= accountApp.myAccount();
+                System.out.println("\tyour name :"+a.getUserName()+"\n\t" +
+                        "you userId: "+a.getUserId()+"\n\t" +
+                        "your follower : "+a.getFollowers()+"\n\t" +
+                        "your following : "+a.getFollowing()
+                );
+                unfollowing(a);
+                break;
+        }
+    }
+    private void unfollowing(Account account2){
+       /* System.out.println("\tfor follow any of user please insert unfollow else exit ");
+        String select = scanner.next().trim();
+        switch (select) {
+            case "unfollow":*/
+               // Account account2 = accountApp.myAccount();
+                Account account1 = accountApp.findByName();
+                System.out.println(account1);
+                account2.removeFollower(account1);
+               // account2.getFollowing().remove(account1);
+                //account2.getFollowing().remove(account1);
+              //  account1.getFollowers().remove(account2);
+                System.out.println("\tyour name :"+account2.getUserName()+"\n\t" +
+                        "you userId: "+account2.getUserId()+"\n\t" +
+                        "your follower : "+account2.getFollowers()+"\n\t" +
+                        "your following : "+account2.getFollowing()
+                );
+                accountApp.follow(account2);
+              //  accountApp.unfollow(account2,account1);
+            /*    break;
+            case "exit":
+                break;*/
+        }
+    }
+//}

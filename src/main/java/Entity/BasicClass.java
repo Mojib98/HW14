@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -17,10 +18,11 @@ public abstract class BasicClass {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Integer id;
 
-    @Override
+  /*  @Override
     public String toString() {
-        return "BasicClass{" +
-                "id=" + id +
-                '}';
-    }
+        return
+                "id=" + id +"  ";
+    }*/
+
+
 }

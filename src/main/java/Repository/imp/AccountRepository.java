@@ -61,8 +61,18 @@ public class AccountRepository implements Repository<Account> {
         String hql="update Entity.Account set passCode =:new " +
                 "where userName =:name";
         var query =t.createQuery(hql);
-        query.setParameter("name",newPassCode);
+        query.setParameter("new",newPassCode);
         query.setParameter("name",name);
         query.executeUpdate();
+    }
+    public void unfollow(Account account1,Account account2){
+    /*    var t = sessionFactory.getCurrentSession();
+        String hql = "delete from Entity.Account c where c.followers = :id and c.following =:ids " +
+                "";
+        var q = t.createQuery(hql,Account.class);
+      *///  q.setParameter("name",name);
+        var t = sessionFactory.getCurrentSession();
+        t.update(account1);
+        t.update(account2);
     }
 }
