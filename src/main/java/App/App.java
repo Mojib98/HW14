@@ -1,7 +1,10 @@
 package App;
 
 import Entity.Account;
+import Entity.Comment;
+import Entity.Tweet;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -45,8 +48,13 @@ public class App {
                     actionForPost();
                     break;
                 case 3:
-                    twitterSystem.seeTweetWithId();
-                    actionForPost();
+                  Tweet tweet2= twitterSystem.seeTweetWithId();
+                    System.out.println(tweet2);
+//                    actionForPost();
+                    List<Comment> comments2=twitterSystem.showComment();
+                    comments2.forEach(System.out::println);
+                  Comment comment=  addReploy(tweet2);
+                  twitterSystem.addReploye(comment);
                     break;
                 case 4:
                     Account account1 = accountApp.findByName();
@@ -73,6 +81,20 @@ public class App {
             case "exit":
                 return;
         }
+    }
+    private Comment addReploy(Tweet tweet2){
+        System.out.print("insert id : ");
+        int id = scanner.nextInt();
+        Comment comment=twitterSystem.findById(id);
+        System.out.println("please insert repolye");
+        String text = scanner.next();
+        System.out.println();
+        Comment comment1 = new Comment(null,text,null);
+        comment.addComment(comment1);
+      //  comment.addComment(comment1);
+        return comment;
+
+
     }
 
 

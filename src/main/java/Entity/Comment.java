@@ -2,10 +2,8 @@ package Entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -32,17 +30,19 @@ public class Comment extends BasicClass {
     @ManyToOne
     private Tweet tweet;
 
-    @ManyToOne
+    @ManyToOne()
     private Comment comment;
-    @OneToMany(mappedBy = "comment")
-    private List<Comment> commentList;
-
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "comment")
+    private List<Comment> commentList = new ArrayList<>();
+    public void addComment(Comment comment){
+        commentList.add(comment);
+        comment.addComment(this);
+    }
     @Override
     public String toString() {
         return "Comment{" +
                 "text='" + text + '\'' +
-                ", tweet=" + tweet +
-                ", comment=" + comment +
+                ", comment=" +
                 ", commentList=" + commentList +
                 "} " + super.toString();
     }

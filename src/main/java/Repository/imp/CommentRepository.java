@@ -37,7 +37,7 @@ public class CommentRepository implements CommentRep<Comment> {
     public List<Comment> findAll(Integer id) {
         var session = sessionFactory.getCurrentSession();
         String hql="from Entity.Comment where " +
-                "id =:id";
+                "tweet.id =:id";
         var query = session.createQuery(hql,Comment.class);
         query.setParameter("id",id);
         return query.list();
@@ -46,8 +46,7 @@ public class CommentRepository implements CommentRep<Comment> {
     @Override
     public List<Comment> findAll() {
         var session = sessionFactory.getCurrentSession();
-        String hql="from Entity.Comment where " +
-                "id =:id";
+        String hql="from Entity.Comment ";
         var query = session.createQuery(hql,Comment.class);
         return query.list();
     }
@@ -55,6 +54,7 @@ public class CommentRepository implements CommentRep<Comment> {
     @Override
     public Comment reply(Comment comment) {
         var session = sessionFactory.getCurrentSession();
+        session.save(comment.getComment());
         session.update(comment);
         return comment;
     }
@@ -77,5 +77,9 @@ public class CommentRepository implements CommentRep<Comment> {
     @Override
     public Tweet findTweet(Integer id) {
         return null;
+    }
+    public Comment findById(Integer id){
+        var session = sessionFactory.getCurrentSession();
+        return session.find(Comment.class,id);
     }
 }

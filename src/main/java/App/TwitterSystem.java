@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TwitterSystem {
+    int idT;
     TweetService tweetService=new TweetService();
     Scanner scanner = new Scanner(System.in);
     CommentService commentService = new CommentService();
@@ -41,7 +42,7 @@ public class TwitterSystem {
     }
     public Tweet seeTweetWithId(){
         System.out.print("\tplease insert id: ");
-       int idT=scanner.nextInt();
+        this.idT=scanner.nextInt();
         Tweet tweet = tweetService.findById(idT);
         return tweet;
     }
@@ -73,5 +74,16 @@ public class TwitterSystem {
         String text = scanner.next();
         Comment comment = new Comment(null,text,tweet);
         commentService.addComment(comment);
+    }
+    public List<Comment> showComment(){
+        List<Comment> comments = null;
+        comments=commentService.findAll(this.idT);
+        return comments;
+    }
+    public Comment findById(Integer id){
+        return commentService.findById(id);
+    }
+    public void addReploye(Comment comment){
+        commentService.reply(comment);
     }
 }

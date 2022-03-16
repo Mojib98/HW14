@@ -42,7 +42,18 @@ public class CommentService implements CommentSer<Comment> {
 
     @Override
     public List<Comment> findAll(Integer id) {
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                return commentRepository.findAll(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+                t.rollback();
+            }
+        }
         return null;
+
     }
 
     @Override
@@ -52,6 +63,17 @@ public class CommentService implements CommentSer<Comment> {
 
     @Override
     public Comment reply(Comment comment) {
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                 commentRepository.reply(comment);
+                 t.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                t.rollback();
+            }
+        }
         return null;
     }
 
@@ -67,6 +89,19 @@ public class CommentService implements CommentSer<Comment> {
 
     @Override
     public Tweet findTweet(Integer id) {
+        return null;
+    }
+    public Comment findById(Integer id){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                return commentRepository.findById(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+                t.rollback();
+            }
+        }
         return null;
     }
 }

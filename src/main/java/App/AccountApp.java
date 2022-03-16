@@ -75,8 +75,8 @@ public class AccountApp {
     public boolean logIn(){
         System.out.print("please insert userName: ");
         String name = scanner.next();
-        System.out.println();
-        System.out.print("please insert passcode");
+       // System.out.println();
+        System.out.print("please insert passcode: ");
         Integer passcode=scanner.nextInt();
         Boolean check =loginService.checking(name,passcode);
         if(check){

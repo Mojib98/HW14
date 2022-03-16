@@ -7,6 +7,9 @@ import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Setter
 @Getter
@@ -25,7 +28,8 @@ public class Tweet extends BasicClass {
     private Integer dislike=0;
     @ManyToOne()
     private Account account;
-
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "tweet")
+    private List<Comment> comments ;
     public Tweet(Integer id, String text, Account account) {
         super(id);
         this.text = text;
@@ -37,6 +41,7 @@ public class Tweet extends BasicClass {
         this.text = text;
     }
 
+
     @Override
     public String toString() {
         return "Tweet{" +
@@ -44,6 +49,7 @@ public class Tweet extends BasicClass {
                 ", likes=" + likes +
                 ", dislike=" + dislike +
                 ", account=" + account +
+
                 "} " + super.toString();
     }
 }
