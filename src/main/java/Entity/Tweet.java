@@ -40,9 +40,7 @@ public class Tweet extends BasicClass {
         super(id);
         this.text = text;
     }
-
-
-  /*  @Override
+/*  @Override
     public String toString() {
         return "Tweet{" +
                 "text='" + text + '\'' +
@@ -52,4 +50,6 @@ public class Tweet extends BasicClass {
 
                 "} " + super.toString();
     }*/
+
+
 }

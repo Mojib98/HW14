@@ -52,7 +52,10 @@ public class App {
                     break;
                 case 3:
                     Tweet tweet2 = twitterSystem.seeTweetWithId();
-                    System.out.println(tweet2);
+                    System.out.println("\nuserName :"+tweet2.getAccount().getUserName()+"" +
+                            "\n\ttweet is :"+tweet2.getText()+"" +
+                            "\n\t like: "+tweet2.getLikes()+"" +
+                            "\n\tcomment :"+tweet2.getComments());
 //                    actionForPost();
                     List<Comment> comments2 = twitterSystem.showComment();
                     comments2.forEach(System.out::println);
@@ -131,7 +134,8 @@ public class App {
     }
     private void profile(){
         System.out.println("\tfor change password insert pass \n" +
-                "\tfor see your information insert info");
+                "\tfor see your information insert info\n" +
+                "\tfor see your followin insert fllow");
         String select=scanner.next().trim();
         switch (select){
             case "pass":

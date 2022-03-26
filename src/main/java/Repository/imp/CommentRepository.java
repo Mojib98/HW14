@@ -88,4 +88,14 @@ public class CommentRepository implements CommentRep<Comment> {
         var session = sessionFactory.getCurrentSession();
         return session.find(Comment.class,id);
     }
+    public List<Comment> showALLReply(Integer id) {
+        List<Comment> list;
+        var session = sessionFactory.getCurrentSession();
+        String sql="select * from comment c inner join reply r on c.id = r.reploy_id " +
+                "where c.id=?";
+        var quesr = session.createNativeQuery(sql,Comment.class);
+        quesr.setParameter(1,id);
+        list=quesr.getResultList();
+        return list;
+    }
 }
