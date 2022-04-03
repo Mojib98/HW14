@@ -3,9 +3,7 @@ package Entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -31,21 +29,13 @@ public class Comment extends BasicClass {
     @ManyToOne
     private Tweet tweet;
 
-//    @ManyToOne()
-//    private Comment comment;
-/*    @OneToMany(fetch = FetchType.EAGER,mappedBy = "comment")
-    private List<Comment> commentList = new ArrayList<>();*/
-//    public void addComment(Comment comment){
-//        commentSet.add(comment);
-//        comment.addComment(this);
-//    }
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "commentSet",fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "commentSet", fetch = FetchType.EAGER)
     private Set<Comment> reply = new HashSet<>();
 
     @JoinTable(name = "reply",
             joinColumns = {@JoinColumn(name = "comment_id")},
             inverseJoinColumns = {@JoinColumn(name = "reploy_id")})
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Comment> commentSet = new HashSet<>();
 
     public void addReply(Comment comment) {
@@ -59,15 +49,4 @@ public class Comment extends BasicClass {
     }
 
 
-/*    @Override
-    public String toString() {
-        return "Comment{" +
-                "text='" + text + '\'' +
-                ", tweet=" + tweet +
-                ", comment=" + comment +
-                ", commentList=" + commentList +
-                ", comment=" + comment +
-                ", reply=" + reply +
-                "} " + super.toString();
-    }*/
 }
