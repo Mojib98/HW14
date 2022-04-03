@@ -48,5 +48,13 @@ public class Comment extends BasicClass {
         toFollow.getReply().remove(this);
     }
 
-
+    @Override
+    public String toString() {
+        return  super.toString()+
+                "\n\tComment{" +
+                "\n\ttext='" + text + '\'' +
+                "\t, tweet=" + tweet +
+                "\t, reply=" + reply +
+                "} "  ;
+    }
 }
