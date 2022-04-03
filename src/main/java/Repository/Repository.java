@@ -8,8 +8,11 @@ import java.util.List;
 
 public interface Repository<T extends BasicClass> {
     void add(T t);
-     void modify(T t);
+
+    void modify(T t);
+
     List<T> findAll();
+
     T findById(Integer id);
 
     Account findByUserId(Integer id);
