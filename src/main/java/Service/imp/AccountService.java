@@ -22,7 +22,6 @@ public class AccountService implements UserService<Account>
     @Override
     public Account add(Account account) {
         Random random = new Random();
-       // int id = random.ints(4, 1000, 1999).findFirst().getAsInt();
         var ids=  Math.abs(account.hashCode() % 1000000);
         account.setUserId(ids);
         System.out.println(ids);

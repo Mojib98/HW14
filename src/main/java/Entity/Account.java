@@ -49,4 +49,10 @@ public class Account extends BasicClass {
                 "\n\t, userName='" + userName + '\'' +
                 "\n} " ;
     }
+
+    public Account(Integer id, Integer userId, String userName) {
+        super(id);
+        this.userId = userId;
+        this.userName = userName;
+    }
 }

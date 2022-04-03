@@ -44,7 +44,7 @@ public class AccountRepository implements Repository<Account> {
     @Override
     public Account findByUserId(Integer id) {
         var session = sessionFactory.getCurrentSession();
-        String hql = "from Entity.Account where " +
+        String hql = " select new Account (id,userId,userName ) from Entity.Account where " +
                 "userId =:id";
         var q = session.createQuery(hql, Account.class);
         q.setParameter("id", id);
@@ -53,7 +53,7 @@ public class AccountRepository implements Repository<Account> {
 
     public Account findByUserName(String name) {
         var session = sessionFactory.getCurrentSession();
-        String hql = "from Entity.Account where " +
+        String hql = "select new Account (id,userId,userName ) from  Account where " +
                 "userName =:name";
         var q = session.createQuery(hql, Account.class);
         q.setParameter("name", name);
@@ -72,8 +72,8 @@ public class AccountRepository implements Repository<Account> {
     }
 
     public void unfollow(Account account1, Account account2) {
-        var t = sessionFactory.getCurrentSession();
-        t.update(account1);
-        t.update(account2);
+        var session = sessionFactory.getCurrentSession();
+        session.update(account1);
+        session.update(account2);
     }
 }

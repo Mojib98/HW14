@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CommentRepository implements CommentRep<Comment> {
-    SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
+   private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
 
     @Override
