@@ -1,9 +1,6 @@
 package Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -26,7 +23,7 @@ public class Tweet extends BasicClass {
     private Integer likes=0;
     @ColumnDefault("0")
     private Integer dislike=0;
-    @ManyToOne()
+    @ManyToOne(fetch =FetchType.EAGER)
     private Account account;
     @OneToMany(fetch = FetchType.EAGER,mappedBy = "tweet")
     private List<Comment> comments ;
