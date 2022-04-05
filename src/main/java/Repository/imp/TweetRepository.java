@@ -11,7 +11,7 @@ import java.util.List;
 import static com.sun.tools.attach.VirtualMachine.list;
 
 public class TweetRepository implements TweetRep<Tweet> {
-    SessionFactory sessionFactory;
+  private  final   SessionFactory sessionFactory;
 
     public TweetRepository() {
         sessionFactory = SessionFactorySingleton.getInstance();

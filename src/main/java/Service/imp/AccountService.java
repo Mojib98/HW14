@@ -22,7 +22,6 @@ public class AccountService implements UserService<Account>
     @Override
     public Account add(Account account) {
         Random random = new Random();
-       // int id = random.ints(4, 1000, 1999).findFirst().getAsInt();
         var ids=  Math.abs(account.hashCode() % 1000000);
         account.setUserId(ids);
         System.out.println(ids);
@@ -45,10 +44,11 @@ public class AccountService implements UserService<Account>
         try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
-
+                t.begin();
                 accountRepository.modify(account);
                 t.commit();
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
             }
         }
@@ -60,10 +60,11 @@ public class AccountService implements UserService<Account>
          try (var session = sessionFactory.getCurrentSession()) {
             var t = session.getTransaction();
             try {
-
+                t.begin();
                 list =accountRepository.findAll();
                 t.commit();
             } catch (Exception e) {
+                e.printStackTrace();
                 t.rollback();
             }
         }
@@ -122,6 +123,24 @@ public class AccountService implements UserService<Account>
             }
         }
         return account;
+    }
+    public void unfollow(Account account2,Account account1){
+        try (var session = sessionFactory.getCurrentSession()) {
+            var t = session.getTransaction();
+            try {
+                t.begin();
+                account2.removeFollower(account1);
+               // account2.getFollowing().remove(account1);
+               // account1.getFollowers().remove(account2);
+              //  accountRepository.modify(account1);
+             //   accountRepository.modify(account2);
+                accountRepository.unfollow(account1,account2);
+                t.commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                t.rollback();
+            }
+        }
     }
 
 }

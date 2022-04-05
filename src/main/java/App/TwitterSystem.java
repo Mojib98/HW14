@@ -86,4 +86,13 @@ public class TwitterSystem {
     public void addReploye(Comment comment){
         commentService.reply(comment);
     }
+    //new wAy
+    public void AllUser(){
+        List<Account> list = null;
+
+    }
+    public void commment(Comment comment,Comment comment1){
+        commentService.reply(comment,comment1);
+    }
+
 }

@@ -29,14 +29,6 @@ public class SessionFactorySingleton {
                     .addAnnotatedClass(Tweet.class)
                     .addAnnotatedClass(BasicClass.class)
                     .addAnnotatedClass(Comment.class)
-        /*            .addAnnotatedClass(Person.class)
-                    .addAnnotatedClass(BaseClass.class)
-                    .addAnnotatedClass(Employee.class)
-                    .addAnnotatedClass(Professor.class)
-                    .addAnnotatedClass(Course.class)
-                    .addAnnotatedClass(Student.class)
-                    .addAnnotatedClass(BaseCourse.class)
-                    .addAnnotatedClass(SectionCourse.class)*/
                     .buildMetadata()
                     .buildSessionFactory();
         }

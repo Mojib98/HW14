@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,8 +18,7 @@ public abstract class BasicClass {
 
     @Override
     public String toString() {
-        return "BasicClass{" +
-                "id=" + id +
-                '}';
+        return "\n\t" +
+                "id=" + id;
     }
 }

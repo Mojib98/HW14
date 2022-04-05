@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CommentRepository implements CommentRep<Comment> {
-    SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
+   private final SessionFactory sessionFactory = SessionFactorySingleton.getInstance();
 
 
     @Override
@@ -53,9 +53,15 @@ public class CommentRepository implements CommentRep<Comment> {
 
     @Override
     public Comment reply(Comment comment) {
+        return null;
+    }
+
+
+    public Comment reply(Comment comment,Comment comment1) {
         var session = sessionFactory.getCurrentSession();
-        session.save(comment.getComment());
-        session.update(comment);
+        session.save(comment);
+        comment1.addReply(comment);
+        session.update(comment1);
         return comment;
     }
 
@@ -81,5 +87,15 @@ public class CommentRepository implements CommentRep<Comment> {
     public Comment findById(Integer id){
         var session = sessionFactory.getCurrentSession();
         return session.find(Comment.class,id);
+    }
+    public List<Comment> showALLReply(Integer id) {
+        List<Comment> list;
+        var session = sessionFactory.getCurrentSession();
+        String sql="select * from comment c inner join reply r on c.id = r.reploy_id " +
+                "where c.id=?";
+        var quesr = session.createNativeQuery(sql,Comment.class);
+        quesr.setParameter(1,id);
+        list=quesr.getResultList();
+        return list;
     }
 }

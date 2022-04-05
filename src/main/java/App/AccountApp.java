@@ -30,8 +30,8 @@ public class AccountApp {
             System.out.println("\t\t!!!please try again!!!");
         }
     }
-    public void changePassword(String idName){
-        accountService.setName(idName);
+    public void changePassword(){
+        accountService.setName(this.name);
         try{
         System.out.println();
         System.out.print("please insert newPassCode: ");
@@ -42,14 +42,18 @@ public class AccountApp {
             System.out.println("\t\t!!!WROong!!!");
         }
     }
-    public void ShowAllUser(){
-        List<Account> accountList;
+    public void showAllUser(){
+        List<Account> accountList = null;
         try {
             accountList=accountService.findAll();
-            accountList.forEach(System.out::println);
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("\t\t!!!Not Find!!!");
+        }
+        for(Account a:accountList){
+            System.out.println("\taccount name :"+a.getUserName()+"\n" +
+                            "\tuserId: "+a.getUserId()+"" +
+                            "\n\tid: "+a.getId());
         }
     }
     public void findByUser(){
@@ -68,8 +72,9 @@ public class AccountApp {
     public Account findByName(){
         Account account2;
         System.out.print("\tplease insert userName: ");
-        String name = scanner.next();
-        account2=accountService.findByUserName(name);
+        String name1 = scanner.next();
+        account2=accountService.findByUserName(name1);
+        System.out.println(account2);
         return account2;
     }
     public boolean logIn(){
@@ -95,5 +100,11 @@ public class AccountApp {
         account2=accountService.findByUserName(this.name);
         return account2;
 
+    }
+    public void follow(Account account){
+        accountService.modify(account);
+    }
+    public void unfollow(Account account,Account account1){
+        accountService.unfollow(account,account1);
     }
 }
