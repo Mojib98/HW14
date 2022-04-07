@@ -1,5 +1,5 @@
 import App.App;
-public class Maintest {
+public class Main {
     static {
         System.out.println("Static block");
     }
