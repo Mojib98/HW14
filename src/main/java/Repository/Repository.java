@@ -16,4 +16,8 @@ public interface Repository<T extends BasicClass> {
     T findById(Integer id);
 
     Account findByUserId(Integer id);
+
+    Account findByUserName(String name);
+    void ChangePassword(Integer newPassCode, String name);
+    void unfollow(Account account1, Account account2);
 }
